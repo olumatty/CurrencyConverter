@@ -1,6 +1,7 @@
+import Image from 'next/image';
 import React from 'react'
 
-const CurrencySelect = () => {
+const CurrencySelect = ({selectedCurrency, handleCurrency}) => {
     const currencyCodes = [
         "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", "AZN",
         "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BRL",
@@ -20,8 +21,19 @@ const CurrencySelect = () => {
         "VND", "VUV", "WST", "XAF", "XCD", "XOF", "XPF", "YER", "ZAR", "ZMW",
         "ZWL"
     ];
+
+    const countryCode = selectedCurrency.substring(0,2);
+    const flagSrc = `https://flagsapi.com/${countryCode}/flat/64.png`;
   return (
-    <div>
+    <div className='relative flex items-center'>
+        <Image src={flagSrc} layout="intrinsic" height={30} width={30} alt="" className='absolute top-1 left-2 '/>
+
+        <select onChange={handleCurrency}  value={selectedCurrency} className="w-full h-10 pl-16 md:w-[220px] rounded">
+            {currencyCodes.map((currency) => (
+                <option key={currency} value={currency}>{currency}</option>
+            ))}
+        </select>
+
       
     </div>
   )
